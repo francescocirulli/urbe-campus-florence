@@ -5,6 +5,8 @@
     "hardhat": "^2.22.18"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^5.2.0"
+    "@aave/core-v3": "^1.19.3",
+    "@openzeppelin/contracts": "^5.2.0",
+    "viem": "^2.22.11"
   }
 }

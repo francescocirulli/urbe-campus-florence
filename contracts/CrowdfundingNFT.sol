@@ -3,12 +3,14 @@ pragma solidity ^0.8.17;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+
 
 /**
  * @title Crowdfunding
  * @dev Contract for managing USDC-based crowdfunding campaigns with single contribution policy
  */
-contract Crowdfunding {
+contract Crowdfunding is ERC721 {
     /// EVENTS
     event Contribution(address indexed contributor, uint256 amount);
     event FundsClaimed(address indexed admin, uint256 amount);
@@ -81,7 +83,7 @@ contract Crowdfunding {
         uint256 _minGoalToCollect,
         uint256 _endTime,
         address _usdcTokenAddress
-    ){
+    ) ERC721("CustomNFT", "CNFT"){
         if(_adminCampaign == address(0)) revert InvalidAddress();
         if(_usdcTokenAddress == address(0)) revert InvalidAddress();
         if(_minGoalToCollect == 0) revert InvalidGoal();
@@ -119,6 +121,8 @@ contract Crowdfunding {
         // Perform the transfer last
         bool success = IERC20(usdcTokenAddress).transferFrom(msg.sender, address(this), amount);
         require(success, "USDC transfer failed");
+
+        _mint(msg.sender, tokenId);
         
         emit Contribution(msg.sender, amount);
     }
