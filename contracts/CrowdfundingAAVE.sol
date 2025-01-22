@@ -30,7 +30,6 @@ contract Crowdfunding {
   error InvalidAddress();
   error InvalidGoal();
   error InvalidEndTime();
-  error invalidAddress();
   /// STATE VARIABLES
   // Money collected by the campaign
   uint256 public collectedFunds;
@@ -113,7 +112,7 @@ contract Crowdfunding {
 
   function setCustomNFTAddress(address _customNFTAddress) public onlyAdmin {
     if (address(customNFT) != address(0)) {
-      revert invalidAddress();
+        revert InvalidAddress();
     }
     customNFT = CustomNFT(_customNFTAddress);
   }
