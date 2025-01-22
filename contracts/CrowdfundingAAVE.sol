@@ -93,7 +93,6 @@ contract Crowdfunding {
     uint256 _minGoalToCollect,
     uint256 _endTime,
     address _usdcTokenAddress,
-    address _customNFTAddress,
     address _aavePoolAddress,
     address _aUSDC
   ) {
@@ -106,7 +105,6 @@ contract Crowdfunding {
     minGoalToCollect = _minGoalToCollect;
     endTime = _endTime;
     usdcTokenAddress = _usdcTokenAddress;
-    customNFT = CustomNFT(_customNFTAddress);
     aavePoolAddress = _aavePoolAddress;
     aUSDC = _aUSDC;
   }
